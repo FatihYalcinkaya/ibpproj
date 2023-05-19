@@ -2,14 +2,16 @@
 
 include("connection.php");
 
+$email_error = "";
+
 
 if (isset($_POST['register'])) {
 
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $telno = $_POST['telno'];
 
-    $addUser = "INSERT INTO hesaplar (email,password,telno) VALUES('$email','$password','$telno') ";
+    $addUser = "INSERT INTO users (email,password,telno) VALUES('$email','$password','$telno') ";
 
     $runAddUser = mysqli_query($connection, $addUser);
 
@@ -19,14 +21,15 @@ if (isset($_POST['register'])) {
       </div>
       ';
     } else {
-        echo '<div class="alert alert-success" role="alert">
+        echo '<div class="alert alert-danger" role="alert">
         error while registiration
       </div>
       ';
-    };
+    }
+
+    mysqli_close($connection);
 }
 
-mysqli_close($connection);
 ?>
 
 
@@ -62,10 +65,9 @@ mysqli_close($connection);
                 <div class="mb-3">
 
                     <label for="telno" class="form-label">Telephone Number</label>
-                    <input type="tel" class="form-control" id="telno" name="telno">
+                    <input type="tel" class="form-control " id="telno" name="telno">
 
                 </div>
-
 
                 <button type="submit" class="btn btn-primary" name="register">Register</button>
             </form>
