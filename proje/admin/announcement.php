@@ -113,6 +113,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 20px;
             text-align: center;
         }
+
+        .button {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: darkgreen;
+        }
+
+        a {
+            text-decoration: none;
+            text-decoration-color: white;
+        }
     </style>
 </head>
 
@@ -136,8 +155,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p class='success'>Duyuru başarıyla eklendi.</p>";
     }
     ?>
+
+
+    <div>
+        <button class="button"><a href="./admindashboard.php">Go to Homepage</a></button>
+    </div>
+
 </body>
 
 </html>
-
-

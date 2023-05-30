@@ -25,7 +25,7 @@ require 'dbconnection.php';
                 <div class="card-header">
 
                     <h4>User Edit
-                        <a href="index.php" class="btn btn-danger float-end">BACK</a>
+                        <a href="userindex.php" class="btn btn-danger float-end">BACK</a>
                     </h4>
 
                 </div>

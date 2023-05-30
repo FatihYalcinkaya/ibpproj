@@ -28,7 +28,7 @@ require 'dbconnection.php';
                 <div class="card-header">
 
                     <h4>Book Edit
-                        <a href="index.php" class="btn btn-danger float-end">BACK</a>
+                        <a href="bookindex.php" class="btn btn-danger float-end">BACK</a>
                     </h4>
 
                 </div>

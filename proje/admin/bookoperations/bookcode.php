@@ -22,12 +22,12 @@ if (isset($_POST['save_book'])) {
     if ($query_run) {
 
         $_SESSION['message'] = 'Book created succesfully';
-        header("Location: addbook.php");
+        header("Location: bookindex.php");
         exit(0);
     } else {
 
         $_SESSION['message'] = 'Book not created';
-        header("Location: addbook.php");
+        header("Location: bookindex.php");
         exit(0);
     }
 }
@@ -50,11 +50,11 @@ if (isset($_POST['update_book'])) {
     if ($query_run) {
 
         $_SESSION['message'] = 'Book updated succesfully';
-        header("Location: index.php");
+        header("Location: bookindex.php");
         exit(0);
     } else {
         $_SESSION['message'] = 'Book not updated ';
-        header("Location: index.php");
+        header("Location: bookindex.php");
         exit(0);
     }
 }

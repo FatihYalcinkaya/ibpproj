@@ -86,7 +86,7 @@
         <ul class="menu">
             <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="./useroperations/userindex.php"><i class="fas fa-users"></i> User Operations</a></li>
-            <li><a href="logout.php"><i class="fas fa-book"></i> Book Operations</a></li>
+            <li><a href="./bookoperations/bookindex.php"><i class="fas fa-book"></i> Book Operations</a></li>
             <li><a href="announcement.php"><i class="fas fa-envelope"></i> Announcement</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 

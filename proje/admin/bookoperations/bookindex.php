@@ -17,6 +17,27 @@ require 'dbconnection.php';
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    <style>
+        .button {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: darkgreen;
+        }
+
+        a {
+            text-decoration: none;
+            text-decoration-color: white;
+        }
+    </style>
+
     <title>Books</title>
 </head>
 
@@ -92,6 +113,9 @@ require 'dbconnection.php';
 
 
 
+    <div>
+        <button class="button"><a href="../admindashboard.php">Go to Homepage</a></button>
+    </div>
 
 
 
