@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         // Başarılı bir şekilde eklendiğinde yönlendirme yap
+        header("Location: admindashboard.php");
         exit;
     } catch (PDOException $e) {
         // Hata durumunda hata mesajını göster veya logla
@@ -51,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Announcement</title>
     <style>
         body {
@@ -132,6 +135,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-decoration: none;
             text-decoration-color: white;
         }
+
+        /* Desktop layout */
+        @media (min-width: 992px) {
+
+            /* Form styles */
+            form {
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Tablet layout */
+        @media (max-width: 991px) {
+
+            /* Form styles */
+            form {
+                max-width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Mobile layout */
+        @media (max-width: 768px) {
+
+            /* Form styles */
+            form {
+                max-width: 95%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        input[type=text],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            background-color: #e8f0fe;
+            color: #333;
+            resize: vertical;
+        }
     </style>
 </head>
 
@@ -155,7 +204,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p class='success'>Duyuru başarıyla eklendi.</p>";
     }
     ?>
-
 
     <div>
         <button class="button"><a href="./admindashboard.php">Go to Homepage</a></button>

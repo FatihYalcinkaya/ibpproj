@@ -6,16 +6,18 @@ session_start();
 
 require 'dbconnection.php';
 
-
 ?>
-
 
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+
 
     <style>
         .button {
@@ -42,85 +44,77 @@ require 'dbconnection.php';
 </head>
 
 <body>
-
     <div class="container mt-4">
 
-        <?php include('message.php');  ?>
+        <?php include('message.php'); ?>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Book Details
-                            <a href="addbook.php" class="btn btn-primary float-end">Add Book</a>
+                        <h4 class="d-flex justify-content-between align-items-center">Book Details
+                            <a href="addbook.php" class="btn btn-primary">Add Book</a>
                         </h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Author</th>
-                                    <th>Summary</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Author</th>
+                                        <th>Summary</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $query = "SELECT * FROM book";
+                                    $query_run = mysqli_query($connection, $query);
 
-                                $query = "SELECT * FROM book  ";
-                                $query_run = mysqli_query($connection, $query);
+                                    if (mysqli_num_rows($query_run) > 0) {
+                                        foreach ($query_run as $bookData) {
+                                    ?>
+                                            <tr>
+                                                <td><?= $bookData['id']; ?></td>
+                                                <td><?= $bookData['name']; ?></td>
+                                                <td><?= $bookData['author']; ?></td>
+                                                <td><?= $bookData['summary']; ?></td>
+                                                <td><?= $bookData['status']; ?></td>
+                                                <td>
+                                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                //dbdeki verileri yazdırmak icin tabloya
-
-                                if (mysqli_num_rows($query_run) > 0) {
-                                    foreach ($query_run as $bookData) {
-
-                                ?>
-                                        <tr>
-                                            <td><?= $bookData['id']; ?></td>
-                                            <td><?= $bookData['name']; ?></td>
-                                            <td><?= $bookData['author']; ?></td>
-                                            <td><?= $bookData['summary']; ?></td>
-                                            <td><?= $bookData['status']; ?></td>
-                                            <td>
-                                                <a href="bookview.php?id=<?= $bookData['id']; ?>" class="btn btn-info btn-sm">View</a>
-                                                <a href="bookedit.php?id=<?= $bookData['id']; ?>" class="btn btn-success btn-sm">Edit</a>
-
-                                                <form action="bookcode.php" method="POST" class="d-inline">
-                                                    <button type="submit" name="delete_book" value="<?= $bookData['id']; ?>" class="btn btn-danger btn-sm">Delete</button>
-
-                                                </form>
-                                            </td>
-                                        </tr>
-                                <?php
-
+                                                        <a href="bookview.php?id=<?= $bookData['id']; ?>" class="btn btn-info btn-sm me-md-2 mb-2">View</a>
+                                                        <a href="bookedit.php?id=<?= $bookData['id']; ?>" class="btn btn-success btn-sm me-md-2 mb-2">Edit</a>
+                                                        <form action="bookcode.php" method="POST">
+                                                            <button type="submit" name="delete_book" value="<?= $bookData['id']; ?>" class="btn btn-danger btn-sm mb-2">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    } else {
+                                        echo "<h4>No Record Found</h4>";
                                     }
-                                } else {
-                                    echo "<h4>No Record Found</h4>";
-                                }
-
-                                ?>
-
-                            </tbody>
-                        </table>
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+        <div>
+            <button class="button"><a href="../admindashboard.php">Go to Homepage</a></button>
+        </div>
+
     </div>
-
-
-
-    <div>
-        <button class="button"><a href="../admindashboard.php">Go to Homepage</a></button>
-    </div>
-
-
-
-
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
