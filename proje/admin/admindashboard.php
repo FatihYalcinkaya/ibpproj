@@ -17,7 +17,7 @@ $bookcount = $row[0];
 
 // databasedeki duyuruları gösteren kod
 
-$sql = "SELECT * FROM announcement ";
+$sql = "SELECT * FROM announcement ORDER BY date DESC ";
 
 $result = mysqli_query($connection, $sql);
 
@@ -34,7 +34,7 @@ $result = mysqli_query($connection, $sql);
     <title>Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <style>
         * {
@@ -131,7 +131,8 @@ $result = mysqli_query($connection, $sql);
             <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="./useroperations/userindex.php"><i class="fas fa-users"></i> User Operations</a></li>
             <li><a href="./bookoperations/bookindex.php"><i class="fas fa-book"></i> Book Operations</a></li>
-            <li><a href="announcement.php"><i class="fas fa-envelope"></i> Announcement</a></li>
+            <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Announcement</a></li>
+            <li><a href=""><i class="fas fa-envelope"></i>Messages</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 
         </ul>
@@ -184,7 +185,7 @@ $result = mysqli_query($connection, $sql);
             <br>
             <div class="info">
                 <div class="container">
-                    <h2>Announcements</h2>
+                    <h2> <u> <strong> Recent Announcements </strong> </u></h2>
                     <br>
                     <br>
                     <p> <?php if (mysqli_num_rows($result) > 0) {
@@ -200,6 +201,9 @@ $result = mysqli_query($connection, $sql);
             </div>
         </section>
     </div>
+
+
+    echo "$userID"
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>

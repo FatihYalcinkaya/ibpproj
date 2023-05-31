@@ -1,44 +1,5 @@
 <?php
 
-session_start();
-
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$dbname = "projedatabase";
-
-$connection = mysqli_connect($hostname, $username, $password, $dbname);
-
-if (!$connection) {
-    die('connection failed' . mysqli_connect_error());
-}
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $sql = " SELECT * FROM user WHERE email='$email' AND password='$password'";
-
-    $query = mysqli_query($connection, $sql);
-
-    if (mysqli_num_rows($query) > 0) {
-        echo "user exist";
-        $row = mysqli_fetch_array($query);
-
-
-        if ($row['usertype'] == 'admin') {
-            echo "admin";
-            header("Location: ./admin/admindashboard.php");
-            exit();
-        } else {
-            echo "user";
-            header("Location: ./user/userdashboard.php");
-        }
-    } else {
-        echo "user does not exist";
-    }
-}
 
 ?>
 
@@ -47,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 
 <head>
-    <title>Library Management System</title>
+    <title>Password Update</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
@@ -91,7 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         input[type=email],
-        input[type=password] {
+        input[type=password],
+        input[type=text] {
             width: 100%;
             padding: 15px 20px;
             margin: 8px 0;
@@ -136,7 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             input[type=email],
-            input[type=password] {
+            input[type=password],
+            input[type=text] {
                 padding: 10px 15px;
                 font-size: 1em;
             }
@@ -151,13 +114,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="container">
-        <h1>Login</h1>
-        <form action="index.php" method="post">
-            <label for="email">Email</label>
-            <input placeholder="email" type="email" id="email" name="email" required>
-            <label for="password">Password</label>
-            <input placeholder="password" type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
+        <h1>Password Reset</h1>
+        <form action="passwordchange.php" method="post">
+
+
+            <label for="password">Current Password</label>
+            <input placeholder="current password" type="text" id="password" name="currentpassword" required>
+
+            <label for="password">New Password</label>
+            <input placeholder="new password" type="text" id="password" name="newpassword" required>
+
+            <label for="password">Confirm Password</label>
+            <input placeholder="confirm new password" type="text" id="password" name="confirmpassword" required>
+
+            <input type="submit" value="Update Password">
         </form>
     </div>
 </body>
