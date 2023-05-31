@@ -4,6 +4,13 @@ session_start();
 
 require 'dbconnection.php';
 
+// url girerek gitmeyi engelleme
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('Location: ../index.php');
+    exit();
+}
+
 
 // kitap sayısını çeken kod
 $result = mysqli_query($connection, "SELECT COUNT(*) FROM book;");
@@ -122,7 +129,13 @@ $result = mysqli_query($connection, $sql);
         <ul class="menu">
             <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="./useroperations/passwordchange.php"><i class="fas fa-key"></i> Password Operations</a></li>
-            <li><a href="./bookoperations/bookindex.php"><i class="fas fa-book"></i> Book Operations</a></li>
+
+            <li><a href="./bookoperations/viewbook.php"><i class="fas fa-book"></i> View Books</a></li>
+
+
+            <li><a href="./bookoperations/searchbook.php"><i class="fas fa-book-open"></i> Search Books</a></li>
+
+
             <li><a href=""><i class="fas fa-envelope"></i>Messages</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 

@@ -39,7 +39,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                 header("Location: ./user/userdashboard.php");
             }
         } else {
-            echo "user does not exist";
+            echo "invalid login";
         }
     }
 }
