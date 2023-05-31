@@ -1,6 +1,12 @@
 <?php
-
 require 'dbconnection.php';
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('Location: ../index.php');
+    exit();
+}
+
 
 // kisi sayısını sayan kod
 $result = mysqli_query($connection, "SELECT COUNT(*) FROM user;");
@@ -21,9 +27,7 @@ $sql = "SELECT * FROM announcement ORDER BY date DESC ";
 
 $result = mysqli_query($connection, $sql);
 
-
 ?>
-
 
 
 <!DOCTYPE html>

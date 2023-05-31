@@ -1,5 +1,59 @@
 <?php
 
+session_start();
+
+
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$dbname = "projedatabase";
+
+$connection = mysqli_connect($hostname, $username, $password, $dbname);
+
+if (!$connection) {
+    die('connection failed' . mysqli_connect_error());
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+
+    $email = $_POST["email"];
+    $currentpassword = $_POST["currentpassword"];
+    $newpassword = $_POST["newpassword"];
+    $confirmpassword = $_POST["confirmpassword"];
+
+
+    $sql = "SELECT * FROM user WHERE email='$email' AND password='$currentpassword'";
+    $result = mysqli_query($connection, $sql);
+
+
+    if (mysqli_num_rows($result) > 0) {
+
+        if ($newpassword == $confirmpassword) {
+            $sql = "UPDATE user SET password='$newpassword' WHERE email='$email'";
+            if (mysqli_query($connection, $sql)) {
+                $_SESSION['message'] = 'Password updated successfully';
+                header("Location: ../userdashboard.php");
+            } else {
+
+                $_SESSION['message'] = 'Error updating password!';
+
+                echo "<h2> Error updating password: </h2>" . mysqli_error($connection);
+            }
+        } else {
+
+            $_SESSION['message'] = 'New passwords do not match. Please try again.';
+            echo "<h2> New passwords do not match. Please try again. </h2>";
+        }
+    } else {
+
+        $_SESSION['message'] = 'Current password is incorrect. Please try again.';
+        echo "<h2> Current password is incorrect. Please try again. </h2>";
+    }
+
+    mysqli_close($connection);
+}
 
 ?>
 
@@ -115,8 +169,10 @@
 <body>
     <div class="container">
         <h1>Password Reset</h1>
-        <form action="passwordchange.php" method="post">
+        <form action="passwordchange.php" method="POST">
 
+            <label for="email">Email</label>
+            <input type="text" name="email" placeholder="email" id="email" required>
 
             <label for="password">Current Password</label>
             <input placeholder="current password" type="text" id="password" name="currentpassword" required>
@@ -128,7 +184,10 @@
             <input placeholder="confirm new password" type="text" id="password" name="confirmpassword" required>
 
             <input type="submit" value="Update Password">
+
         </form>
+
+
     </div>
 </body>
 

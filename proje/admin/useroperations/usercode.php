@@ -62,6 +62,16 @@ if (isset($_POST['save_user'])) {
     $usertype =  $_POST['usertype'];
 
 
+    $query = "SELECT * FROM user WHERE email='$email'";
+    $resutlt = mysqli_query($connection, $query);
+
+    if (mysqli_num_rows($resutlt) > 0) {
+
+        $_SESSION['message'] = 'User with this email already exists';
+        header("Location: userindex.php");
+        exit(0);
+    }
+
     $query = "INSERT INTO user (email,password,usertype) VALUES ('$email','$password','$usertype')";
 
     $query_run = mysqli_query($connection, $query);

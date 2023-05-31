@@ -13,32 +13,38 @@ if (!$connection) {
     die('connection failed' . mysqli_connect_error());
 }
 
+if (isset($_POST['email']) && isset($_POST['password'])) {
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-    $sql = " SELECT * FROM user WHERE email='$email' AND password='$password'";
+        $sql = " SELECT * FROM user WHERE email='$email' AND password='$password'";
 
-    $query = mysqli_query($connection, $sql);
+        $query = mysqli_query($connection, $sql);
 
-    if (mysqli_num_rows($query) > 0) {
-        echo "user exist";
-        $row = mysqli_fetch_array($query);
+        if (mysqli_num_rows($query) > 0) {
+            echo "user exist";
+            $row = mysqli_fetch_array($query);
+
+            $_SESSION['loggedin'] = true;
 
 
-        if ($row['usertype'] == 'admin') {
-            echo "admin";
-            header("Location: ./admin/admindashboard.php");
-            exit();
+            if ($row['usertype'] == 'admin') {
+                echo "admin";
+                header("Location: ./admin/admindashboard.php");
+                exit();
+            } else {
+                echo "user";
+                header("Location: ./user/userdashboard.php");
+            }
         } else {
-            echo "user";
-            header("Location: ./user/userdashboard.php");
+            echo "user does not exist";
         }
-    } else {
-        echo "user does not exist";
     }
 }
+
+
 
 ?>
 
