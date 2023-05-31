@@ -136,7 +136,8 @@ $result = mysqli_query($connection, $sql);
             <li><a href="./bookoperations/searchbook.php"><i class="fas fa-book-open"></i> Search Books</a></li>
 
 
-            <li><a href=""><i class="fas fa-envelope"></i>Messages</a></li>
+            <li><a href="./message/chat.php"><i class="fas fa-envelope"></i>Messages</a></li>
+
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 
         </ul>
